@@ -1,5 +1,9 @@
 // Our Notes
+//-----------
 // Anything we wanna ask Robin, anything we wanna double check
+// NOT ROBIN: What the hell is this done() callback and how it works
+
+
 
 // Storing our chatterbox messages in the database
 
@@ -63,7 +67,10 @@
   // In the models, we'll be doing queries
   // In the controllers, we'll be ...
 
-
-
+// GET
+  // mysql.createConnection()
+  // connect();
+  // dbConnection.query
+  // dbConnection
 
 
