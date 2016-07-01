@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>chatterbox</title>
+    <link rel="stylesheet" href="styles/styles.css">
+
+    <!-- dependencies -->
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/underscore/underscore-min.js"></script>
+    <!-- your scripts -->
+    <script src="env/config.js"></script>
+    <script src="scripts/app.js"></script>
+  </head>
+  <body>
+    <div id="main">
+      <h1>chatterbox</h1>
+      <!-- Your HTML goes here! -->
+      <label>Rooms:</label>
+      <select id="roomSelect" name="rooms">
+      </select>
+
+      <button type="button" id="newRoom">Add Room</button>
+      <div id="roomControls" class="hidden">
+        <input type='text' id='newRoomName'></input>
+        <button type="button" id="newRoomConfirm">Confirm</button>
+      </div>
+
+
+
+      <div id="send">
+        <input type='text' id='message'></input>
+        <input type='submit' value='Submit' class='submit'></input>
+      </div>
+
+      <div id="chats">
+      </div>
+
+    </div>
+
+  </body>
+</html>
+
+<!--
+// HTML Layout
+  // Dropdown list
+    // Top of the list is "Add a Room" => calling addRoom()
+  // Input box
+  // Submit button => calling send();
+ -->
