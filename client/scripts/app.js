@@ -2,21 +2,21 @@
 
 $(document).ready(function () {
   var app = {
-  server:'http://127.0.0.1:3000/classes/messages',
+  server:'http://127.0.0.1:3000',
   roomname: "lobby",
   friends: {},
   username: window.location.search.slice(10),
   init: function(){
     app.fetch();
-    app.getRooms();
+    // app.getRooms();
     app.changeRooms();
-    app.createRooms();
+    // app.createRooms();
     app.addFriend();
     app.handleSubmit();
   },
   send: function(message){
     $.ajax({
-      url: app.server,
+      url: app.server + '/classes/messages',
       type: 'POST',
       data: JSON.stringify(message),
       contentType: 'application/json',
@@ -34,7 +34,7 @@ $(document).ready(function () {
   },
   fetch: function(){
     $.ajax({
-      url: app.server,
+      url: app.server + '/classes/messages',
       type: 'GET',
       // Fetch the data from latest to oldest
       // Set the limit to 100 max
@@ -45,13 +45,11 @@ $(document).ready(function () {
       contentType: 'application/json',
       success: function (data) {
         console.log("Fetching....");
-        data = JSON.parse(data);
 
         // If messages are received successfully
         // Loop over the data and add the message in the relevant room
 
-        var messages = data.results;
-        console.log(messages[0]);
+        var messages = data;
 
         for(var i = messages.length - 1; i >= 0; i--){
           var message = messages[i];
@@ -81,10 +79,11 @@ $(document).ready(function () {
     // Otherwise we'll get hacked :)
     // Please check sanitize() for more info
 
+    console.log(message);
     //  We only append if there is text
-    if(message.text){
+    if(message.message){
       // We run our text through the sanitization process
-      var text = app.sanitize(message.text);
+      var text = app.sanitize(message.message);
 
       // We check if the username is one of our friends
       // If so, we give it a bold style
@@ -233,7 +232,7 @@ $(document).ready(function () {
       var message = {};
 
       // Get the message from the input box
-      message.text = $('#message').val();
+      message.message = $('#message').val();
       message.username = app.username;
       message.roomname = app.roomname;
 
