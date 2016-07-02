@@ -12,17 +12,21 @@ CREATE TABLE `messages` (
   `roomname` VARCHAR(160)
 );
 
+
+CREATE TABLE users (
+  username VARCHAR(30) DEFAULT 'anonymous',
+  user_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY
+);
+
 /* Create other tables and define schemas for them here! */
-/* Test to see if it's working */
+-- INSERT INTO `messages` (username, message, roomname) VALUES ('aj', 'hello there', 'lobby'),
+-- ('aj', 'hello again', 'lobby'),
+-- ('aj', 'hello there', 'mySQL');
 
-INSERT INTO `messages` (username, message, roomname) VALUES ('aj', 'hello there', 'lobby');
-
-
-/* If the database already exists, just drop it and create it again :) */
-
-
+/* Extra Credit
+ * Create a separate users table
+ *
 
 /*  Execute this file from the command line by typing:
  *    mysql -u root < server/schema.sql
  *  to create the database and the tables.*/
-

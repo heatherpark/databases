@@ -1,53 +1,64 @@
-var db = require('../db').dbConnection;
+var db = require('../db').db;
 
 // Test our connection
-db.connect(function(err) {
-  if (err) {
-    console.log("womp womp, something's wong!");
+db.connect(function(err){
+  if(err){
+    console.log("womp womp, something's wrong!");
   } else {
-    console.log("everything's good");
+    console.log("Let's rock and roll!");
   }
 });
-
-// model.messages.get
-// model.messages.post
 
 module.exports = {
   messages: {
     // a function which produces all the messages
-    get: function (callback) {
-      // Access the database
-      console.log("Hello from GET");
+    get: function (cb) {
+      // console.log("Hello from GET");
+      // console.log("This is the callback" + cb);
 
-      // Set the query
-      var daQuery = 'SELECT * FROM messages';
-
-      // Get all the messages
-      db.query(daQuery, function(err, results){
-        if(err){
-          console.log("You messed up!" + err);
+      var q = 'SELECT * FROM messages'
+      // Query the database and get all messages
+      db.query(q, function(err, rows){
+        if(err) {
+          console.log(err);
         } else {
-          callback(results);
+          cb(rows);
+        }
+      });
+    },
+    post: function (message, callback) {
+      console.log("This is POST and the callback is" + callback);
+      var q = 'INSERT INTO messages (message, username, roomname) values (' + '"' +  message.message +  '"' + ',' + '"' + message.username + '"' + ',' + '"' +message.roomname + '"' + ');'
+
+
+      console.log(q);
+      db.query(q, function (err, results, fields) {
+        if (err) throw err;
+        else {
+          callback();
         }
       });
 
-    },
-    // a function which can be used to insert a message into the database
-    post: function () {
-      console.log("Hello from POST");
-    }
+      // Post the user to the chat server
+      // Post a message to the node chat server
 
+    } // a function which can be used to insert a message into the database
   },
 
   users: {
     // Ditto as above.
-    get: function () {},
-    post: function () {}
+    get: function () {
+      console.log("This is USERS GET model");
+    },
+    post: function (user, callback) {
+      console.log("This is USERS POST model");
+      db.query("INSERT INTO users (username) values ('" + user.username + "');",
+      function (err, results, fields) {
+        if (err) throw err;
+        else {
+          callback();
+        }
+      });
+    }
   }
 };
-
-
- // var queryString = 'SELECT * FROM messages';
- //        var queryArgs = [];
-
- //        dbConnection.query(queryString, queryArgs, function(err, results) {

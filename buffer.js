@@ -4,7 +4,6 @@
 // NOT ROBIN: What the hell is this done() callback and how it works
 
 
-
 // Storing our chatterbox messages in the database
 
 // Client side is complete
@@ -65,7 +64,11 @@
   // DONE? MAYBE NOT? Edit the spec to fit our settings
   // DONE Head to db/index.js and somehow connect to our database
   // In the models, we'll be doing queries
+    // DONE GET method
+    // POST method
   // In the controllers, we'll be ...
+    // DONE GET method
+    // POST method
 
 // GET
   // mysql.createConnection()

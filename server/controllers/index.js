@@ -1,30 +1,36 @@
 var models = require('../models');
 
-
-
 module.exports = {
   messages: {
-    // a function which handles a get request for all messages
     get: function (req, res) {
       // GET controller will reach into the model
-      // get all the rows in our table
-      // JSON.stringify
-      // res.send()
-      models.messages.get(function(messages){
-        // stringify the messages
-        messages = JSON.stringify(messages);
-        res.send(messages);
+      // get all the rows that match
+      // and send them back as a response
+      models.messages.get(function(data){
+        // console.log("Data is " + JSON.stringify(data));
+        res.send(data);
       });
-
-    },
-    // a function which handles posting a message to the database
-    post: function (req, res) {}
+    }, // a function which handles a get request for all messages
+    post: function (req, res) {
+      console.log("HELLO FROM POST CONTROLLER!");
+      var message = req.body;
+      models.messages.post(message, function(){
+        res.send("success");
+      });
+    } // a function which handles posting a message to the database
   },
 
   users: {
     // Ditto as above
-    get: function (req, res) {},
-    post: function (req, res) {}
+    get: function (req, res) {
+      console.log("HELLO FROM USERS GET CONTROLLER");
+    },
+    post: function (req, res) {
+      console.log("HELLO FROM USERS POST CONTROLLER");
+      var user = req.body;
+      models.users.post(user, function() {
+        res.send("success");
+      });
+    }
   }
 };
-
